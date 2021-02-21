@@ -4,6 +4,7 @@
 
     //Require insert
     require("insert.php");
+    require("read.php");
 
     class Database {
         
@@ -49,6 +50,19 @@
                 }
             }else{
                 die("<p style='color:red'>Insert failed. Could not found insert data. Usage of this command: \$database->insertRow(InsertTable, InsertRowm, InsertValue)"); 
+            }
+        }
+
+        function readAll($table = null){
+            if(isset($table)){
+                if($this->conn){
+                    $read = new Read($this->conn, $table);
+                    return $read->readAll();
+                }else{
+                    die("<p style='color:red'>Read failed. No connection found. First connect using \$database->connect()"); 
+                }
+            }else{
+                die("<p style='color:red'>Read failed. Could not read data. Usage of this command: \$database->readAll(table)"); 
             }
         }
 

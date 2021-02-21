@@ -3,10 +3,10 @@
 
     $database = new Database("localhost", "root", "", "simpleDatabase");
     $database->connect();
-    $row = ['name', 'description', 'price'];
-    $value = ['Naam', 'Beschrijving', 5.00];
-    if($database->insertRow("product", $row, $value)){
-        echo "Inserted item with id " . $database->getInsertId();
-    };
+    $result = $database->readAll('product');
+    while($row = $result->fetch_assoc()){
+        echo $row['description'];
+    }
+
 
 ?>
