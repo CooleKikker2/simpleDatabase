@@ -51,6 +51,14 @@
                 die("<p style='color:red'>Insert failed. Could not found insert data. Usage of this command: \$database->insertRow(InsertTable, InsertRowm, InsertValue)"); 
             }
         }
+
+        function getInsertId(){
+            if($this->conn->insert_id){
+                return($this->conn->insert_id);
+            }else{
+                die("<p style='color:red'>Could not get insert id. Did you inserted something?");
+            }
+        }
     }
 
 

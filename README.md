@@ -12,7 +12,17 @@
 $database = new Database("Your Servername", "Your Database User", "YourUserPassword", "YourDatabaseName");
 $database->connect();
 ```
-> After connection the database is available in the variable $database.
+> After connection the database is available in the variable $database.<br>
+> <b>Insert into database</b><br><br>
+> You can also easily insert data into a database using 2 arrays. One array is for the row names, the other for the rows value
+```php
+$row = ['name', 'description', 'price'];
+$value = ['Soap', 'A nice soap', 5.95];
+$if($database->insertRow('products', $row, $value)){
+    echo "Succesfully added product to products. The insert id is: " . $database->getInsertId();
+}
+```
+> After inserting columns into the database as above, the last inserted id is available in $database->getInsertId();
 
 ## Installation
 
