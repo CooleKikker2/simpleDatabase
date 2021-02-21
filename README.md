@@ -7,11 +7,12 @@
 ## Code Samples
 
 > <b>Connect to database</b><br><br>
-> With this very simple API you can simpely connect to the SQL-databse using this 2 simple lines of code:
+> You can simply connect to your database using the following 2 lines of code.
 ```php
 $database = new Database("Your Servername", "Your Database User", "YourUserPassword", "YourDatabaseName");
 $database->connect();
 ```
+> After connection the database is available in the variable $database.
 
 ## Installation
 

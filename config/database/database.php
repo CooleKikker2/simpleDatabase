@@ -1,9 +1,12 @@
 <?php
     //Disable Default errors
-    error_reporting(0);
+    //error_reporting(0);
+
+    //Require insert
+    require("insert.php");
 
     class Database {
-
+        
         //Define Class Properties
         public $server;
         public $username;
@@ -17,7 +20,7 @@
             $this->server = $server;
             $this->username = $username;
             $this->password = $password;
-            $this->database = $db;
+            $this->db = $db;
         }
 
         //Connect function. Function connects to database using contructor data
@@ -31,6 +34,21 @@
             }else{
                 //No errors. Return connection to user
                 return $this->conn;
+            }
+        }
+
+        function insertRow($table = null, $insertRow = null, $insertValue = null){
+            if(isset($table) && isset($insertRow) && isset($insertValue)){
+                if($this->conn){
+                    //Call insert class and give connection, table and values
+                    $insert = new Insert($this->conn, $table, $insertRow, $insertValue);
+                    return $insert->insertValues();
+                    
+                }else{
+                    die("<p style='color:red'>Insert failed. No connection found. First connect using \$database->connect()");
+                }
+            }else{
+                die("<p style='color:red'>Insert failed. Could not found insert data. Usage of this command: \$database->insertRow(InsertTable, InsertRowm, InsertValue)"); 
             }
         }
     }
