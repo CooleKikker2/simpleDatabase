@@ -12,7 +12,7 @@
 $database = new Database("Your Servername", "Your Database User", "YourUserPassword", "YourDatabaseName");
 $database->connect();
 ```
-> After connection the database is available in the variable $database.<br>
+> After connection the database is available in the variable $database.<br><br>
 > <b>Insert into database</b><br><br>
 > You can also easily insert data into a database using 2 arrays. One array is for the row names, the other for the rows value
 ```php
