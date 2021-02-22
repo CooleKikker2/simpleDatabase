@@ -4,6 +4,6 @@
     "version": "0.0.1-dev",
 
     "require" :{
-        "php" : ">=7.0"
+        "php" : ">=7.4"
     }
 }
