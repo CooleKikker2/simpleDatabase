@@ -6,6 +6,8 @@
 
 ## Code Samples
 
+> Full Documentation can be found here: http://example.com/
+
 > <b>Connect to database</b><br><br>
 > You can simply connect to your database using the following 2 lines of code.
 ```php
