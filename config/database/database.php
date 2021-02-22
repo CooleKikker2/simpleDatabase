@@ -16,7 +16,7 @@
         public $conn;
 
         //Constructor Functions
-        function __construct($server, $username, $password, $db){
+        function __construct($server, $username, $password, $db = null){
             //Set SQL server properties
             $this->server = $server;
             $this->username = $username;
@@ -26,15 +26,19 @@
 
         //Connect function. Function connects to database using contructor data
         function connect(){
-            //Set database connection to $this->conn
-            $this->conn = new mysqli($this->server, $this->username, $this->password, $this->db);
+            if($this->db){
+                //Set database connection to $this->conn
+                $this->conn = new mysqli($this->server, $this->username, $this->password, $this->db);
 
-            //Check for connection errors. If errors send error to user screen
-            if($this->conn->connect_error){
-                die("<p style='color:red'>Database connection failed. The error is:<b> " . $this->conn->connect_error ."</b></p>");
+                //Check for connection errors. If errors send error to user screen
+                if($this->conn->connect_error){
+                    die("<p style='color:red'>Database connection failed. The error is:<b> " . $this->conn->connect_error ."</b></p>");
+                }else{
+                    //No errors. Return connection to user
+                    return $this->conn;
+                }
             }else{
-                //No errors. Return connection to user
-                return $this->conn;
+                die("<p style='color:red'>Database connection failed. You did'nt specify a database name. Give a database name for connecting or create a new database using \$database->newDatabase(name)</p>");
             }
         }
 
@@ -99,6 +103,38 @@
                 die("<p style='color:red'>Could not get insert id. Did you inserted something?");
             }
         }
+
+        function hash($toHash){
+            return password_hash($toHash, PASSWORD_DEFAULT);
+        }
+
+        function newDatabase($name){
+            $this->conn = new mysqli($this->server, $this->username, $this->password);
+
+            //Check for connection errors. If errors send error to user screen
+            if($this->conn->connect_error){
+                die("<p style='color:red'>Database connection failed. The error is:<b> " . $this->conn->connect_error ."</b></p>");
+            }else{
+                $query = "CREATE DATABASE IF NOT EXISTS `$name`";
+                if($this->conn->query($query)){
+                    $this->db = $name;
+                    if($this->closeConnection()){;
+                        return $this->connect();
+                    }
+                }
+            }
+        }
+
+        function closeConnection(){
+            if($this->conn){
+                if($this->conn->close()){
+                    return(1);
+                }else{
+                    die("Something went wrong in closing the SQL connection!");
+                }
+            }
+        }
+
     }
 
 
