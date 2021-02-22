@@ -22,7 +22,16 @@ $if($database->insertRow('products', $row, $value)){
     echo "Succesfully added product to products. The insert id is: " . $database->getInsertId();
 }
 ```
-> After inserting columns into the database as above, the last inserted id is available in $database->getInsertId();
+> After inserting columns into the database as above, the last inserted id is available in $database->getInsertId();<br><br>
+> <b>Read from database</b><br><br>
+> To read data from the database you need to use the $database->readAll(table) function.
+```php
+$data = $database->readAll("products");
+while($row = $data->fetch_assoc()){
+    echo $row['name'];
+}
+```
+> In the example above we get all data from the database and fetch the data to the variable $row. After that we can return the row['name'] from the database.
 
 ## Installation
 

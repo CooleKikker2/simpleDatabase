@@ -3,9 +3,9 @@
 
     $database = new Database("localhost", "root", "", "simpleDatabase");
     $database->connect();
-    $result = $database->readAll('product');
+    $result = $database->readByRow('product','name', "Naam");
     while($row = $result->fetch_assoc()){
-        echo $row['description'];
+        echo $database->getInsertId();
     }
 
 

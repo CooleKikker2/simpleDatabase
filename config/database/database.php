@@ -66,6 +66,32 @@
             }
         }
 
+        function readById($table = null, $id = null){
+            if(isset($table) && isset($id)){
+                if($this->conn){
+                    $read = new Read($this->conn, $table);
+                    return $read->readFromId($id);
+                }else{
+                    die("<p style='color:red'>Read failed. No connection found. First connect using \$database->connect()"); 
+                }
+            }else{
+                die("<p style='color:red'>Read failed. Could not read data. Usage of this command: \$database->readById(table, id)"); 
+            }
+        }
+
+        function readByRow($table = null, $row = null, $value = null){
+            if(isset($table) && isset($row) && isset($value)){
+                if($this->conn){
+                    $read = new Read($this->conn, $table);
+                    return $read->readFromRow($row, $value);
+                }else{
+                    die("<p style='color:red'>Read failed. No connection found. First connect using \$database->connect()"); 
+                }
+            }else{
+                die("<p style='color:red'>Read failed. Could not read data. Usage of this command: \$database->readByRow(table, row, value)"); 
+            }
+        }
+
         function getInsertId(){
             if($this->conn->insert_id){
                 return($this->conn->insert_id);
